@@ -132,6 +132,21 @@
             color: #aaa;
         }
 
+        #fullscreenModal {
+            padding: 15px !important;
+        }
+
+        #nextBtn, #prevBtn {
+            padding: 15px 20px !important;
+            font-size: 20px !important;
+        }
+
+        #closeBtn {
+            top: 15px !important;
+            right: 15px !important;
+            padding: 8px 15px !important;
+        }
+
         @media (max-width: 768px) {
             .video-grid {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -144,6 +159,50 @@
 
             .video-meta {
                 font-size: 11px;
+            }
+
+            #fullscreenModal {
+                padding: 10px !important;
+            }
+
+            #nextBtn {
+                right: 10px !important;
+                padding: 10px 15px !important;
+                font-size: 18px !important;
+            }
+
+            #prevBtn {
+                left: 10px !important;
+                padding: 10px 15px !important;
+                font-size: 18px !important;
+            }
+
+            #closeBtn {
+                top: 10px !important;
+                right: 10px !important;
+                padding: 6px 12px !important;
+                font-size: 14px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #nextBtn {
+                right: 5px !important;
+                padding: 8px 12px !important;
+                font-size: 16px !important;
+            }
+
+            #prevBtn {
+                left: 5px !important;
+                padding: 8px 12px !important;
+                font-size: 16px !important;
+            }
+
+            #closeBtn {
+                top: 8px !important;
+                right: 8px !important;
+                padding: 5px 10px !important;
+                font-size: 12px !important;
             }
         }
     </style>

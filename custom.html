@@ -171,7 +171,7 @@
             }
 
             // Use CORS proxy for live deployments
-            const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+            const proxyUrl = 'https://thingproxy.freeboard.io/fetch/' + url;
             const finalUrl = window.location.hostname.includes('github.dev') ? url : proxyUrl;
 
             customVideo.pause();

@@ -98,8 +98,7 @@
 
         .preset-button {
             width: 100%;
-            text-align: left;
-            padding: 14px 16px;
+            aspect-ratio: 16 / 9;
             border-radius: 12px;
             border: 1px solid #333;
             background: #111;
@@ -107,6 +106,18 @@
             cursor: pointer;
             font-size: 15px;
             transition: background 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .preset-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         .preset-list {
@@ -119,6 +130,18 @@
         .preset-button:hover {
             background: #1b1b1b;
             border-color: #ff0000;
+        }
+
+        @media (max-width: 768px) {
+            .preset-list {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .preset-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         .video-player {
@@ -187,12 +210,94 @@
 
         const presets = [
             {
+                title: 'Video 18',
+                img: 'https://www.xtits.xxx/contents/videos_screenshots/149000/149291/402x225/7.jpg',
+                url: 'https://z6v2p9a8.bkcdn.net/library/900752/682159d7c610c40058ab1d9937495f4d6f70348e.mp4'
+            },
+            {
                 title: 'Video 1',
+                img: 'https://via.placeholder.com/320x180/ff0000/ffffff?text=Video+1',
                 url: 'https://www.xozilla.xxx/get_file/14/a9baa48b063bb21880621680bb9f3c00/215000/215888/215888.mp4/?rnd=1778388205025'
             },
             {
                 title: 'Video 2',
+                img: 'https://via.placeholder.com/320x180/00ff00/ffffff?text=Video+2',
                 url: 'https://www.xozilla.xxx/get_file/7/359f7a2e2d51053adcd1f3ffdf6b826c/815000/815667/815667.mp4/?rnd=1778391481105'
+            },
+            {
+                title: 'Video 3',
+                img: 'https://via.placeholder.com/320x180/0000ff/ffffff?text=Video+3',
+                url: 'https://www.porndr.com/get_file/1/3992f849d141d331d384f9d94af00969/248000/248650/248650_720p.mp4/?v-acctoken=OTY2fDIwOTAwfDB8ZTQyNjBlNDMyMzRiOWMxYTU3MGI1M2Q0OTEzYjY0N2M5bf2de19669e7ca0&rnd=1778393504220'
+            },
+            {
+                title: 'Video 4',
+                img: 'https://via.placeholder.com/320x180/ffff00/000000?text=Video+4',
+                url: 'https://www.xtits.xxx/get_file/4/1d35ca6135e31d90369544ccb187ae58/19000/19807/19807.mp4/?rnd=1778393782500'
+            },
+            {
+                title: 'Video 5',
+                img: 'https://via.placeholder.com/320x180/ff00ff/ffffff?text=Video+5',
+                url: 'https://www.xtits.xxx/get_file/7/25199d290b16aa842f2f2495571d1606/183000/183270/183270.mp4/?rnd=1778394018466'
+            },
+            {
+                title: 'Video 6',
+                img: 'https://via.placeholder.com/320x180/00ffff/000000?text=Video+6',
+                url: 'https://www.xtits.xxx/get_file/4/e9e54df84c9f549de949783c8a996e97/216000/216165/216165.mp4/?rnd=1778394083606'
+            },
+            {
+                title: 'Video 7',
+                img: 'https://via.placeholder.com/320x180/800080/ffffff?text=Video+7',
+                url: 'https://www.xtits.xxx/get_file/3/6cb354a622f004824e46fd7abff9f72a/118000/118811/118811.mp4/?rnd=1778394192062'
+            },
+            {
+                title: 'Video 8',
+                img: 'https://via.placeholder.com/320x180/808000/ffffff?text=Video+8',
+                url: 'https://www.xtits.xxx/get_file/4/f59523518bc5cc65e39dadd49c1681ec/19000/19765/19765.mp4/?rnd=1778394402604'
+            },
+            {
+                title: 'Video 9',
+                img: 'https://via.placeholder.com/320x180/008080/ffffff?text=Video+9',
+                url: 'https://www.xtits.xxx/get_file/4/b6f49459bfc2d89f94a5fe262243a5b7/15000/15672/15672.mp4/?rnd=1778394452859'
+            },
+            {
+                title: 'Video 10',
+                img: 'https://via.placeholder.com/320x180/800000/ffffff?text=Video+10',
+                url: 'https://www.xtits.xxx/get_file/4/7a82fbf1bc65ab90a415e667bc3655db/34000/34864/34864.mp4/?rnd=1778394504784'
+            },
+            {
+                title: 'Video 11',
+                img: 'https://via.placeholder.com/320x180/008000/ffffff?text=Video+11',
+                url: 'https://www.xtits.xxx/get_file/5/608ac5e2860a375902abfe1883d4d69e/219000/219452/219452.mp4/?rnd=1778394540511'
+            },
+            {
+                title: 'Video 12',
+                img: 'https://via.placeholder.com/320x180/000080/ffffff?text=Video+12',
+                url: 'https://www.xtits.xxx/get_file/7/f41aaa8dff44a105628f1d2e447ba96b/197000/197022/197022.mp4/?rnd=1778394601876'
+            },
+            {
+                title: 'Video 13',
+                img: 'https://via.placeholder.com/320x180/808080/ffffff?text=Video+13',
+                url: 'https://www.xtits.xxx/get_file/7/6632b0c6622ca8b5ff30243a903cea64/188000/188249/188249.mp4/?rnd=1778394831092'
+            },
+            {
+                title: 'Video 14',
+                img: 'https://via.placeholder.com/320x180/c0c0c0/000000?text=Video+14',
+                url: 'https://www.xtits.xxx/get_file/6/884020af01aac3b46104b238a5f7b482/149000/149843/149843.mp4/?rnd=1778394990978'
+            },
+            {
+                title: 'Video 15',
+                img: 'https://via.placeholder.com/320x180/ffa500/000000?text=Video+15',
+                url: 'https://www.xtits.xxx/get_file/5/c5430a31de572fc22451563326ea64d0/109000/109454/109454.mp4/?rnd=1778395292707'
+            },
+            {
+                title: 'Video 16',
+                img: 'https://via.placeholder.com/320x180/a52a2a/ffffff?text=Video+16',
+                url: 'https://www.xtits.xxx/get_file/6/61937b8ff55d340909c9e60da301bf07/152000/152324/152324.mp4/?rnd=1778395527199'
+            },
+            {
+                title: 'Video 17',
+                img: 'https://via.placeholder.com/320x180/daa520/000000?text=Video+17',
+                url: 'https://www.xtits.xxx/get_file/4/71f4f0a4b48747fe5a0eee70978d8009/35000/35465/35465.mp4/?rnd=1778395598963'
             }
         ];
 
@@ -221,7 +326,7 @@
         function renderPresets() {
             presetList.innerHTML = presets.map((preset, index) => `
                 <button class="preset-button" data-url="${preset.url}">
-                    ${preset.title}
+                    ${preset.img ? `<img src="${preset.img}" alt="${preset.title}" />` : preset.title}
                 </button>
             `).join('');
 

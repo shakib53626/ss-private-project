@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Video Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .header {
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 15px;
+            border-bottom: 2px solid #222;
+            padding-bottom: 10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #aaa;
+            font-size: 14px;
+            padding: 8px 15px;
+            transition: color 0.2s ease;
+            border-bottom: 3px solid transparent;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        .nav-link.active {
+            color: #ff0000;
+            border-bottom-color: #ff0000;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #f1f1f1;
+        }
+
+        .input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-row input {
+            flex: 1 1 320px;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #121212;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .input-row button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #ff0000;
+            color: #fff;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .video-player {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-player video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        #videoStatus {
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .section-title {
+                font-size: 20px;
+            }
+
+            .input-row input,
+            .input-row button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">▶ VideoHub</div>
+        <div class="navbar">
+            <a href="index.html" class="nav-link">Tab 1</a>
+            <a href="tab2.html" class="nav-link">Tab 2</a>
+            <a href="tab3.html" class="nav-link">Tab 3</a>
+            <a href="custom.html" class="nav-link active">Custom</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-title">Custom Video Player</div>
+        <div class="input-row">
+            <input id="videoUrlInput" type="text" placeholder="Paste a video URL here" />
+            <button id="loadVideoBtn">Load Video</button>
+        </div>
+        <div class="video-player">
+            <video id="customVideo" controls>
+                <source id="customVideoSource" src="https://ip316565806.ahcdn.com/key=rNJSD-VzkVM78EdLym5jDg,s=,end=1778392183/state=agAOdrMT/buffer=4000000:9355834,1893.8/speed=84690/reftag=258370620/ssd2/65/8/184232458/b/215000/215888/215888.mp4" type="video/mp4" />
+                Your browser does not support video playback.
+            </video>
+        </div>
+        <div id="videoStatus">No video loaded yet. Paste one URL and click "Load Video".</div>
+    </div>
+
+    <script>
+        const videoUrlInput = document.getElementById('videoUrlInput');
+        const loadVideoBtn = document.getElementById('loadVideoBtn');
+        const customVideo = document.getElementById('customVideo');
+        const customVideoSource = document.getElementById('customVideoSource');
+        const videoStatus = document.getElementById('videoStatus');
+
+        function setStatus(message, isError = false) {
+            videoStatus.textContent = message;
+            videoStatus.style.color = isError ? '#ff5555' : '#aaa';
+        }
+
+        function loadVideo() {
+            const url = videoUrlInput.value.trim();
+            if (!url) {
+                setStatus('Please enter a valid video URL.', true);
+                return;
+            }
+
+            customVideo.pause();
+            customVideoSource.src = url;
+            customVideo.load();
+            customVideo.removeAttribute('loop');
+            setStatus('Video loaded. Use the controls to play it.');
+        }
+
+        loadVideoBtn.addEventListener('click', loadVideo);
+        videoUrlInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                loadVideo();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -96,6 +96,31 @@
             font-size: 15px;
         }
 
+        .preset-button {
+            width: 100%;
+            text-align: left;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .preset-list {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preset-button:hover {
+            background: #1b1b1b;
+            border-color: #ff0000;
+        }
+
         .video-player {
             width: 100%;
             max-width: 100%;
@@ -141,52 +166,79 @@
     </div>
 
     <div class="container">
+        <div class="section-title">Preset Videos</div>
+        <div id="presetList" class="preset-list"></div>
         <div class="video-player">
-            <video controls src="https://www.xozilla.xxx/get_file/14/a9baa48b063bb21880621680bb9f3c00/215000/215888/215888.mp4/?rnd=1778388205025" class="fp-engine" preload="metadata" x-webkit-airplay="allow" webkit-playsinline="true" playsinline="true"></video>
-        </div>
-        <div class="video-player">
-            <video id="customVideo" controls>
-                <source id="customVideoSource" src="https://www.xozilla.xxx/get_file/7/359f7a2e2d51053adcd1f3ffdf6b826c/815000/815667/815667.mp4/?rnd=1778391481105" type="video/mp4" />
+            <video id="customVideo" controls crossorigin="anonymous" playsinline webkit-playsinline>
+                <source id="customVideoSource" src="" type="video/mp4" />
+                Your browser does not support video playback.
             </video>
         </div>
+        <div id="videoStatus">Click a preset video to load it. If the host blocks embedding, the browser may still prevent playback.</div>
+        <div id="sourceLink" style="margin-top: 12px; color: #aaa; font-size: 14px;"></div>
     </div>
 
     <script>
-        const videoUrlInput = document.getElementById('videoUrlInput');
-        const loadVideoBtn = document.getElementById('loadVideoBtn');
         const customVideo = document.getElementById('customVideo');
         const customVideoSource = document.getElementById('customVideoSource');
         const videoStatus = document.getElementById('videoStatus');
+        const sourceLink = document.getElementById('sourceLink');
+        const presetList = document.getElementById('presetList');
+
+        const presets = [
+            {
+                title: 'Video 1',
+                url: 'https://www.xozilla.xxx/get_file/14/a9baa48b063bb21880621680bb9f3c00/215000/215888/215888.mp4/?rnd=1778388205025'
+            },
+            {
+                title: 'Video 2',
+                url: 'https://www.xozilla.xxx/get_file/7/359f7a2e2d51053adcd1f3ffdf6b826c/815000/815667/815667.mp4/?rnd=1778391481105'
+            }
+        ];
 
         function setStatus(message, isError = false) {
             videoStatus.textContent = message;
             videoStatus.style.color = isError ? '#ff5555' : '#aaa';
         }
 
-        function loadVideo() {
-            const url = videoUrlInput.value.trim();
+        function updateSourceLink(url) {
+            sourceLink.innerHTML = `Direct link: <a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#ff6666;">Open source URL</a>`;
+        }
+
+        function loadPresetVideo(url) {
             if (!url) {
-                setStatus('Please enter a valid video URL.', true);
+                setStatus('Invalid preset URL.', true);
                 return;
             }
 
-            // Use CORS proxy for live deployments
-            const proxyUrl = 'https://thingproxy.freeboard.io/fetch/' + url;
-            const finalUrl = window.location.hostname.includes('github.dev') ? url : proxyUrl;
-
             customVideo.pause();
-            customVideoSource.src = finalUrl;
+            customVideoSource.src = url;
             customVideo.load();
-            customVideo.removeAttribute('loop');
-            setStatus('Video loaded. Use the controls to play it.');
+            setStatus('Loaded preset video. Press play to start.');
+            updateSourceLink(url);
         }
 
-        loadVideoBtn.addEventListener('click', loadVideo);
-        videoUrlInput.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                loadVideo();
-            }
+        function renderPresets() {
+            presetList.innerHTML = presets.map((preset, index) => `
+                <button class="preset-button" data-url="${preset.url}">
+                    ${preset.title}
+                </button>
+            `).join('');
+
+            presetList.querySelectorAll('.preset-button').forEach(button => {
+                button.addEventListener('click', () => loadPresetVideo(button.dataset.url));
+            });
+        }
+
+        customVideo.addEventListener('error', () => {
+            setStatus('Video failed to load. This server may block embedding or CORS.', true);
         });
+
+        customVideo.addEventListener('loadedmetadata', () => {
+            setStatus('Video is ready. Use the controls to play it.');
+        });
+
+        renderPresets();
     </script>
 </body>
 </html>

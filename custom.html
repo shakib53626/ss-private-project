@@ -172,8 +172,12 @@
                 return;
             }
 
+            // Use CORS proxy for live deployments
+            const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+            const finalUrl = window.location.hostname.includes('github.dev') ? url : proxyUrl;
+
             customVideo.pause();
-            customVideoSource.src = url;
+            customVideoSource.src = finalUrl;
             customVideo.load();
             customVideo.removeAttribute('loop');
             setStatus('Video loaded. Use the controls to play it.');
